@@ -15,6 +15,12 @@
                 {{employee.office}}
             </p>
 
+            <div class="col-12">
+                <a v-if="employee.linkedIn" :href="'https://www.linkedin.com/' + employee.linkedIn" target="_new"><i class="bi bi-linkedin me-2"></i></a>
+                <a v-if="employee.gitHub" :href="'https://github.com/' + employee.gitHub" target="_new"><i class="bi bi-github me-2"></i></a>
+                <a v-if="employee.twitter" :href="'https://twitter.com/' + employee.twitter" target="_new"><i class="bi bi-twitter"></i></a>
+            </div>
+
         </div>
     </div>
 </template>
@@ -26,7 +32,7 @@ export default {
 
   computed: {
       profilePicture() {
-          return this.employee.imagePortraitUrl ?? './img/placeholder.jpeg'
+          return './img/placeholder.jpeg'
       }
   }
 }
