@@ -49,6 +49,7 @@
 <script>
 
 export default {
+    name: 'Filters',
     props: [ 
         'nameFilter', 
         'offices' 
