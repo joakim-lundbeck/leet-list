@@ -14,6 +14,12 @@
     </div>
 
     <div class="row">
+      <div class="col-12">
+        <Sorting />
+      </div>
+    </div>
+
+    <div class="row">
       <div v-for="employee in filteredEmployees" :key="employee.email" class="col-3">
         <EmployeeCard :employee="employee" />
       </div>
@@ -24,13 +30,15 @@
 <script>
 import EmployeeCard from './components/EmployeeCard.vue'
 import Filters from './components/Filters.vue'
+import Sorting from './components/Sorting.vue'
 
 export default {
   name: 'Leet-List',
   
   components: {
     EmployeeCard,
-    Filters
+    Filters,
+    Sorting
   },
 
   data () {
