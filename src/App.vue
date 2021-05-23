@@ -1,15 +1,25 @@
 <template>
-  <div id="app">
-    
+  <div id="app" class="container">
+    <h1>The fellowship of the Tretton37</h1>
+
+    <div class="row">
+      <div v-for="employee in enabledEmployees" :key="employee.email" class="col-3">
+        <EmployeeCard :employee="employee"></EmployeeCard>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-
+import EmployeeCard from './components/EmployeeCard.vue'
 
 export default {
   name: 'Leet-List',
   
+  components: {
+    EmployeeCard
+  },
+
   data () {
     return {
       enabledEmployees: []  
@@ -29,7 +39,6 @@ export default {
     .then(
       response => {
         this.enabledEmployees = response.data.filter(e => e.published)
-        console.table(this.enabledEmployees)
       }
     )
   }
