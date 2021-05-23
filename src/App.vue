@@ -15,7 +15,9 @@
 
     <div class="row">
       <div class="col-12">
-        <Sorting />
+        <Sorting
+          :sortingName.sync="sortingName"
+          :sortingOffice.sync="sortingOffice" />
       </div>
     </div>
 
@@ -45,7 +47,9 @@ export default {
     return {
       enabledEmployees: [],
       nameFilter: '',
-      offices: []
+      offices: [],
+      sortingName: 0,
+      sortingOffice: 0
     }
   },
 
