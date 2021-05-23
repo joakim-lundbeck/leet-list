@@ -20,9 +20,11 @@
           :sortingOffice.sync="sortingOffice" />
       </div>
     </div>
+    
+    <Pagination />
 
     <div class="row">
-      <div v-for="employee in filteredEmployees" :key="employee.email" class="col-3">
+      <div v-for="employee in chunkEmployees" :key="employee.email" class="col-3">
         <EmployeeCard :employee="employee" />
       </div>
     </div>
@@ -33,6 +35,7 @@
 import EmployeeCard from './components/EmployeeCard.vue'
 import Filters from './components/Filters.vue'
 import Sorting from './components/Sorting.vue'
+import Pagination from './components/Pagination.vue'
 
 export default {
   name: 'Leet-List',
@@ -40,7 +43,8 @@ export default {
   components: {
     EmployeeCard,
     Filters,
-    Sorting
+    Sorting,
+    Pagination
   },
 
   data () {
@@ -63,6 +67,10 @@ export default {
 
     selectedOffices() {
       return this.offices.filter(o => o.selected).map(o => o.name)
+    },
+
+    chunkEmployees() {
+      return this.enabledEmployees
     }
   },
 
