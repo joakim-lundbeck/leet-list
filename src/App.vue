@@ -3,7 +3,15 @@
     <h1>The fellowship of the Tretton37</h1>
 
     <div class="row">
-      <div v-for="employee in enabledEmployees" :key="employee.email" class="col-3">
+      <div class="col-12">
+        <div class="card mb-2">
+          <Filters :nameFilter.sync="nameFilter"></Filters>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div v-for="employee in filteredEmployees" :key="employee.email" class="col-3">
         <EmployeeCard :employee="employee"></EmployeeCard>
       </div>
     </div>
@@ -12,17 +20,28 @@
 
 <script>
 import EmployeeCard from './components/EmployeeCard.vue'
+import Filters from './components/Filters.vue'
 
 export default {
   name: 'Leet-List',
   
   components: {
-    EmployeeCard
+    EmployeeCard,
+    Filters
   },
 
   data () {
     return {
-      enabledEmployees: []  
+      enabledEmployees: [],
+      nameFilter: ''
+    }
+  },
+
+  computed: {
+    filteredEmployees() {
+      return this.enabledEmployees.filter(employee => {
+        return employee.name.toUpperCase().indexOf(this.nameFilter.toUpperCase()) > -1
+      })
     }
   },
 
