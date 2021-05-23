@@ -21,13 +21,20 @@
       </div>
     </div>
     
-    <Pagination />
+    <Pagination
+      :numberOfPages="numberOfPages"
+      :selectedPage.sync="selectedPage" />
 
     <div class="row">
       <div v-for="employee in chunkEmployees" :key="employee.email" class="col-3">
         <EmployeeCard :employee="employee" />
       </div>
     </div>
+
+    <Pagination
+      :numberOfPages="numberOfPages"
+      :selectedPage.sync="selectedPage" />
+
   </div>
 </template>
 
@@ -53,7 +60,8 @@ export default {
       nameFilter: '',
       offices: [],
       sortingName: 0,
-      sortingOffice: 0
+      sortingOffice: 0,
+      selectedPage: 1
     }
   },
 
@@ -62,6 +70,16 @@ export default {
       return this.enabledEmployees.filter(employee => {
         return employee.name.toUpperCase().indexOf(this.nameFilter.toUpperCase()) > -1 &&
         this.selectedOffices.includes(employee.office)
+      }).map((e, index) => {
+          return {
+            page: Math.floor(index  / 8) + 1,
+            name: e.name,
+            office: e.office,
+            imagePortraitUrl: e.imagePortraitUrl,
+            twitter: e.twitter,
+            linkedIn: e.linkedIn,
+            gitHub: e.gitHub
+          }
       })
     },
 
@@ -70,8 +88,12 @@ export default {
     },
 
     chunkEmployees() {
-      return this.enabledEmployees
-    }
+      return this.filteredEmployees.filter(e => e.page == this.selectedPage)
+    },
+
+    numberOfPages() {
+      return Math.floor(this.filteredEmployees.length  / 8) + 1
+    },
   },
 
   watch: {
@@ -93,6 +115,10 @@ export default {
           (a, b) => (a.office > b.office) ? 1 : -1 :
           (a, b) => (a.office < b.office) ? 1 : -1
       )
+    },
+
+    filteredEmployees() {
+      this.selectedPage = 1
     }
   },
 
