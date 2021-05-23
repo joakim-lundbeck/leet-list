@@ -100,7 +100,7 @@ export default {
     sortingName() {
       if(this.sortingName === 0) return
 
-      this.filteredEmployees.sort(
+      this.chunkEmployees.sort(
         this.sortingName === 1 ? 
           (a, b) => (a.name > b.name) ? 1 : -1 :
           (a, b) => (a.name < b.name) ? 1 : -1
@@ -110,7 +110,7 @@ export default {
     sortingOffice() {
       if(this.sortingOffice === 0) return
 
-      this.filteredEmployees.sort(
+      this.chunkEmployees.sort(
         this.sortingOffice === 1 ? 
           (a, b) => (a.office > b.office) ? 1 : -1 :
           (a, b) => (a.office < b.office) ? 1 : -1
