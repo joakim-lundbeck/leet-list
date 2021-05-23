@@ -1,37 +1,72 @@
 <template>
     <div class="card-body">
-        <div class="input-group">
+        <div class="row">
+            <div class="col-3">
 
-            <input 
-                type="text" 
-                class="form-control" 
-                placeholder="Name Search" 
-                v-model="filter"
-                @keyup="$emit('update:nameFilter', filter)" >
+                <div class="input-group">
 
-            <button
-                v-if="filter.length > 0" 
-                class="btn btn-outline-secondary" 
-                type="button"
-                @click="$emit('update:nameFilter', ''), filter=''">
+                    <input 
+                        type="text" 
+                        class="form-control" 
+                        placeholder="Name Search" 
+                        v-model="filter"
+                        @keyup="$emit('update:nameFilter', filter)" >
 
-            <i class="bi bi-x-circle"></i>
+                    <button
+                        v-if="filter.length > 0" 
+                        class="btn btn-outline-secondary" 
+                        type="button"
+                        @click="$emit('update:nameFilter', ''), filter=''">
 
-            </button>
+                    <i class="bi bi-x-circle"></i>
+
+                    </button>
+                </div>
+            </div>
+
+            <div class="col-9">
+                <span v-for="office in offices" :key="office.name">
+
+                    <button
+                        @click="toggleOffice(office)" 
+                        type="button"
+                        :class="['btn', office.selected ? 'btn-dark' : 'btn-outline-dark', 'me-2']">
+                        
+                        <span>
+                            <i :class="['bi', office.selected ? 'bi-check-circle' : 'bi-circle']"></i>
+                        </span>
+                        {{office.name}}
+                    </button>
+
+                </span>
+            </div>
+        
         </div>
+        
     </div>
 </template>
 
 <script>
 
 export default {
-    props: [ 'nameFilter' ],
+    props: [ 
+        'nameFilter', 
+        'offices' 
+    ],
 
     data() {
         return {
-        filter: ''
+            filter: ''
         }
     },
+
+    methods: {
+        toggleOffice(office) {
+            const officeIndex = this.offices.findIndex(o => o.name === office.name)
+            this.offices[officeIndex].selected = !office.selected
+            this.$emit('update:offices', this.offices)
+        }
+    }
 }
 
 </script>

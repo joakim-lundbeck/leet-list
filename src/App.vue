@@ -5,14 +5,17 @@
     <div class="row">
       <div class="col-12">
         <div class="card mb-2">
-          <Filters :nameFilter.sync="nameFilter"></Filters>
+          <Filters 
+            :nameFilter.sync="nameFilter"
+            :offices.sync="offices"
+          />
         </div>
       </div>
     </div>
 
     <div class="row">
       <div v-for="employee in filteredEmployees" :key="employee.email" class="col-3">
-        <EmployeeCard :employee="employee"></EmployeeCard>
+        <EmployeeCard :employee="employee" />
       </div>
     </div>
   </div>
@@ -33,16 +36,22 @@ export default {
   data () {
     return {
       enabledEmployees: [],
-      nameFilter: ''
+      nameFilter: '',
+      offices: []
     }
   },
 
   computed: {
     filteredEmployees() {
       return this.enabledEmployees.filter(employee => {
-        return employee.name.toUpperCase().indexOf(this.nameFilter.toUpperCase()) > -1
+        return employee.name.toUpperCase().indexOf(this.nameFilter.toUpperCase()) > -1 &&
+        this.selectedOffices.includes(employee.office)
       })
-    }
+    },
+
+    selectedOffices() {
+      return this.offices.filter(o => o.selected).map(o => o.name)
+    },
   },
 
   mounted () {
@@ -58,6 +67,17 @@ export default {
     .then(
       response => {
         this.enabledEmployees = response.data.filter(e => e.published)
+
+        const uniqueOffices = [...new Set(
+          this.enabledEmployees.map(e => e.office)
+        )].filter(Boolean).sort()
+
+        this.offices = uniqueOffices.map(e => {
+          return {
+            name: e,
+            selected: true
+          }
+        })
       }
     )
   }
