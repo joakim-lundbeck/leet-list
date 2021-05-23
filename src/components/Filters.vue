@@ -1,7 +1,7 @@
 <template>
     <div class="card-body">
         <div class="row">
-            <div class="col-3">
+            <div class="col-lg-3 col-sm-12">
 
                 <div class="input-group">
 
@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <div class="col-9">
+            <div class="col-lg-9 col-sm-12 mt-sm-2 mt-lg-0">
                 <span v-for="office in offices" :key="office.name">
 
                     <button
@@ -32,7 +32,7 @@
                         type="button"
                         :class="['btn', office.selected ? 'btn-dark' : 'btn-outline-dark', 'me-2']">
                         
-                        <span>
+                        <span class="d-none d-lg-inline">
                             <i :class="['bi', office.selected ? 'bi-check-circle' : 'bi-circle']"></i>
                         </span>
                         {{office.name}}
