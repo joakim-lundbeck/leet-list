@@ -1,7 +1,7 @@
 <template>
     <div class="card-body">
         <div class="row">
-            <div class="col-lg-3 col-sm-12">
+            <div class="col-xl-3 col-sm-12">
 
                 <div class="input-group">
 
@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <div class="col-lg-9 col-sm-12 mt-sm-2 mt-lg-0">
+            <div class="col-xl-9 col-sm-12 mt-sm-2 mt-xl-0">
                 <span v-for="office in offices" :key="office.name">
 
                     <button
