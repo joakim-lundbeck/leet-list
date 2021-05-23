@@ -1,6 +1,8 @@
 <template>
     <div class="card text-white bg-dark mb-3 me-2">
     
+        <img :src="profilePicture" class="card-img-top" :alt="employee.name"> 
+
         <div class="card-body">
             <div class="row">
                 <div class="col-12">
@@ -20,6 +22,12 @@
 <script>
 export default {
   name: 'EmployeeCard',
-  props: [ 'employee' ]
+  props: [ 'employee' ],
+
+  computed: {
+      profilePicture() {
+          return this.employee.imagePortraitUrl ?? './img/placeholder.jpeg'
+      }
+  }
 }
 </script>
