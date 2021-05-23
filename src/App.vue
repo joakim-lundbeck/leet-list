@@ -1,6 +1,6 @@
 <template>
-  <div id="app">
-    
+  <div id="app" class="container">
+    <h1>The fellowship of the Tretton37</h1>
   </div>
 </template>
 
@@ -29,7 +29,6 @@ export default {
     .then(
       response => {
         this.enabledEmployees = response.data.filter(e => e.published)
-        console.table(this.enabledEmployees)
       }
     )
   }
