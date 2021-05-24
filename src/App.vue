@@ -126,7 +126,7 @@ export default {
     const axios = require('axios')
 
     axios
-      .get('/mock/employees.json', {
+      .get('https://api.1337co.de/v3/employees', {
         headers: {
           'Authorization': 'api-key 14:2021-05-18:lucas.stenberg@tretton37.com 5022ab727cb0cb271ff3a7f59b15cedd7c4c63a47c833668d4dde6adedc557f0'
         }

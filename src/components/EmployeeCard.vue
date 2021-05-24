@@ -32,7 +32,7 @@ export default {
 
   computed: {
       profilePicture() {
-          return './img/placeholder.jpeg'
+          return this.employee.imagePortraitUrl ?? './img/placeholder.jpeg'
       }
   }
 }
